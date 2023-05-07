@@ -1,5 +1,4 @@
 
-
 namespace Models
 {
     public class SortBoxView
@@ -16,11 +15,12 @@ namespace Models
         {
             Sort(boxView);
         }
+
         private void Sort(BoxView boxView)
         {
             CurrentLeft = boxView;
             CurrentRight = boxView;
-           
+
             // logic to check if on the edge of the line 
 
             while (CurrentLeft.PreviosBoxView != null && InitialNodeDepthLeft > 0)
@@ -36,14 +36,13 @@ namespace Models
             }
 
             SortDepth -= InitialNodeDepthLeft + InitialNodeDepthRight; // depth of sort 
-            for (BoxView current = CurrentLeft; current != null; current = current.NextBoxView)
+            CurrentLeft.name = " CurrentLeft";
+            CurrentRight.name = "CurrentRight";
+            int depth = CurrentLeft.CurrentIndex + SortDepth;
+            
+            for (BoxView current = CurrentLeft; current.CurrentIndex < depth; current = current.NextBoxView)
             {
-                if (SortDepth-- <= 0)
-                {
-                    break;
-                }
-
-                for (BoxView index = current; index != null; index = index.NextBoxView)
+                for (BoxView index = current; index.CurrentIndex < depth; index = index.NextBoxView)
                 {
                     if (current.Value > index.Value)
                     {
@@ -53,11 +52,21 @@ namespace Models
 
                         current.SetVerticalPosition();
                         current.MoveBack();
+                        index.SetVerticalPosition();
+                        index.MoveBack();
                     }
+
+                    if (index.NextBoxView == null)
+                    {
+                        break;
+                    }
+                }
+
+                if (current.NextBoxView == null)
+                {
+                    break;
                 }
             }
         }
-
-   
     }
 }
