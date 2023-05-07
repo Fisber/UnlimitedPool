@@ -12,7 +12,7 @@ namespace Utils
 
         public const float HEAD_THRESHOLD_CAMERAS_POSITION = 5f;
         public const float TAIL_THRESHOLD_CAMERAS_POSITION = 5f;
-        public const float SWIPE_ELASTIC = 5f;
+        public const float SWIPE_ELASTIC = 10f;
         public const float STABILIZER_DISTANCE = 10f;
 
         public const float DISTANCE_BETWEEN_BOXES = 1.2f;
